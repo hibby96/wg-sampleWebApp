@@ -1,7 +1,7 @@
 const express = require('express')
 const getId = require('docker-container-id');
 const app = express()
-const port = 3000
+const port = 80
 
 
 
@@ -21,7 +21,7 @@ const con = mysql.createConnection({
 // });
 
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     const theID = await myFunction();
     res.send("<h1>This is my cat!  This is being sent from container ID:" + theID + "</h1><img src='https://w2-yahoo-demo.s3.us-west-2.amazonaws.com/cat.jpg' alt='cat image' width='1024' height='427'>")
     //res.send('Hello World!')
@@ -73,7 +73,9 @@ con.connect(function(err) {
 
 
 
-async function myFunction() {
-    const theID =  await getId();
-    return theID
-  }
+function myFunction() {
+    return new Promise(async (resolve, reject) => {
+        const theID =  await getId();
+        resolve(theID)
+    });
+}
