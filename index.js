@@ -5,7 +5,8 @@ const port = 3000
 
 
 app.get('/', async (req, res) => {
-    res.send('Hello there!')
+    console.log(req.query);
+    res.send(req.query)
 })
 
 
