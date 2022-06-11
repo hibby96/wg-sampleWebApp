@@ -1,9 +1,9 @@
 
 function base64encode(something) {
-    return btoa(something);
+    return Buffer.from(something).toString('base64');
 }
 function base64decode(something) {
-    return atob(something);
+    return Buffer.from(something, 'base64').toString('ascii');
 }
 
 
